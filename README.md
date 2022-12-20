@@ -28,12 +28,12 @@ The script then starts the streaming context with ssc.start() and waits for it t
 
 Here is an example for expected inputs - 
 
-Enter the path to your Spark installation: /usr/spark/spark-3.0.0-preview2-bin-hadoop2.7
-Enter the Zookeeper quorum (host:port): localhost:2181
-Enter the consumer group name: spark-streaming-consumer
-Enter the Kafka topic name: twitter-topic
-Enter the batch interval in seconds: 10
-Enter the MySQL hostname: localhost
-Enter the MySQL username: root
-Enter the MySQL password: password
-Enter the MySQL database name: twitter
+- Enter the path to your Spark installation: /usr/spark/spark-3.0.0-preview2-bin-hadoop2.7
+- Enter the Zookeeper quorum (host:port): localhost:2181
+- Enter the consumer group name: spark-streaming-consumer
+- Enter the Kafka topic name: twitter-topic
+- Enter the batch interval in seconds: 10
+- Enter the MySQL hostname: localhost
+- Enter the MySQL username: root
+- Enter the MySQL password: password
+- Enter the MySQL database name: twitter
