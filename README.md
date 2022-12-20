@@ -13,3 +13,27 @@ The script then opens a new terminal window and starts the nc command in it with
 Finally, the script defines two functions: write_to_mysql() and insert_to_mysql(). The write_to_mysql() function takes an RDD as input and calls the insert_to_mysql() function on its partitions. The insert_to_mysql() function connects to the MySQL database, inserts the records from the input RDD into the tweets table, and closes the connection. The insert_to_mysql() function also pipes the records to the nc command through subprocess.call().
 
 The script then starts the streaming context with ssc.start() and waits for it to terminate with ssc.awaitTermination(). When the streaming context is stopped, the script stops the Spark context with ssc.stop().
+
+# What to provide as input 
+
+- The spark_home variable should contain the path to your Spark installation.
+- The zk_quorum variable should contain the host and port of the Zookeeper quorum, in the format host:port.
+- The consumer_group variable should contain the name of the consumer group to use when reading from Kafka.
+- The kafka_topic variable should contain the name of the Kafka topic to read from.
+- The batch_interval variable should contain the batch interval in seconds to use when processing the stream.
+- The mysql_host variable should contain the hostname of the MySQL server.
+- The mysql_user variable should contain the username to use when connecting to the MySQL server.
+- The mysql_password variable should contain the password for the specified MySQL user.
+- The mysql_database variable should contain the name of the MySQL database to use.
+
+Here is an example for expected inputs - 
+
+Enter the path to your Spark installation: /usr/spark/spark-3.0.0-preview2-bin-hadoop2.7
+Enter the Zookeeper quorum (host:port): localhost:2181
+Enter the consumer group name: spark-streaming-consumer
+Enter the Kafka topic name: twitter-topic
+Enter the batch interval in seconds: 10
+Enter the MySQL hostname: localhost
+Enter the MySQL username: root
+Enter the MySQL password: password
+Enter the MySQL database name: twitter
