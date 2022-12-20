@@ -1,4 +1,6 @@
 # Import necessary libraries
+import time
+from textblob import TextBlob
 import logging
 import sys
 import findspark
@@ -54,11 +56,13 @@ def insert_to_mysql(records):
     try:
         for record in records:
             subprocess.call(["echo", record, "|", "nc", "localhost", "9999"])
+            sentiment = TextBlob(record).sentiment.polarity
         conn = mysql.connector.connect(
             host="localhost", user="root", password="password", database="twitter")
         cursor = conn.cursor()
-        for record in records:
-            cursor.execute("INSERT INTO tweets (text) VALUES (%s)", (record,))
+        for record, sentiment in records:
+            cursor.execute(
+                "INSERT INTO tweets (text, sentiment) VALUES (%s, %s)", (record, sentiment))
         conn.commit()
         conn.close()
     except Exception as e:
@@ -66,9 +70,11 @@ def insert_to_mysql(records):
         sys.exit(1)
 
 
+
 tweets.foreachRDD(write_to_mysql)
 
 # Start the streaming context and process the stream
 ssc.start()
-ssc.awaitTermination()
+# Timeout after 10 minutes (600,000 milliseconds)
+ssc.awaitTerminationOrTimeout(600000)
 ssc.stop()
