@@ -70,3 +70,10 @@ The script then starts the streaming context with ssc.start() and waits for it t
     > password
 - Enter the MySQL database name: 
     > twitter
+    
+## Added an End to End test to verify data
+
+The test verifies that data sent by the Kafka producer is correctly received by a netcat listener and written to the MySQL database.
+
+### to run the tests using unittest
+> python3 test_end_to_end.py  
